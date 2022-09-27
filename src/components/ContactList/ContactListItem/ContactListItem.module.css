@@ -1,0 +1,19 @@
+.contact_item {
+    margin-bottom: 20px;
+  }
+  
+  .list_item_text {
+    margin-right: 10px;
+  }
+
+.delete_btn {
+    margin-left: 20px;
+    width: 100px;
+    height: 30px;
+    border: none;
+    border-radius: 10px;
+}
+.delete_btn:hover,
+.delete_btn:focus {
+        background-color: red;
+      }
