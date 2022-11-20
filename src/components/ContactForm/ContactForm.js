@@ -1,42 +1,10 @@
-import React, { useState } from 'react'
+
 import { nanoid } from 'nanoid'
 import PropTypes from "prop-types";
 import styles from './ContactForm.module.css'
 
 
-export default function ContactForm({ onSubmit }) {
-const [name, setName] = useState('')
-const [number, setNumber] = useState('')
 
-const nameInputId = nanoid();
-const numberInputId = nanoid();
-
-const handleChange = (e) => {
-  const { name, value } = e.currentTarget;
-  switch (name) {
-    case 'name':
-        setName(value);
-        break;
-    
-    case 'number':
-        setNumber(value);
-        break;
-    
-    default:
-        return;
-}
-};
-
-const handleSubmit = (e) => {
-  e.preventDefault();
-  onSubmit({ name, number });
-  reset();
-};
-
-const reset = () => {
-  setName('');
-  setNumber('');
-}
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
         <label htmlFor={nameInputId} className={styles.label}>
