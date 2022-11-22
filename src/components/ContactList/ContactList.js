@@ -1,20 +1,30 @@
-import React from "react";
+
+import { useDispatch, useSelector } from "react-redux";
+import { deleteContact } from "redux/phoneBook";
 import ContactListItem from "./ContactListItem/ContactListItem";
 import PropTypes from "prop-types";
 import styles from './ContactList.module.css'
 
-const ContactList = ({ contacts, onDeleteContact }) => (
+const ContactList = () => {
+  const contacts = useSelector(state => state.items);
+  const filter = useSelector(state => state.filter);
+  const dispatch = useDispatch();
+  
+  return (
     <ul className={styles.contacts_list}>
-      {contacts.map(({ id, name, number }) => (
+      {contacts
+      .filter(el => el.name.toLowerCase().includes(filter))
+      .map(({ id, name, number }) => (
         <ContactListItem
           key={id}
           contactName={name}
           contactNumber={number}
-          onClickDeleteContact={() => onDeleteContact(id)}
+          onClickDeleteContact={() => dispatch(deleteContact({id}))}
         />
       ))}
     </ul>
   );
+  }
 
   ContactList.propTypes = {
     contacts: PropTypes.arrayOf(

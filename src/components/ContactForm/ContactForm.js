@@ -1,13 +1,50 @@
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
 
-import { nanoid } from 'nanoid'
 import PropTypes from "prop-types";
 import styles from './ContactForm.module.css'
+import { addContact } from 'redux/phoneBook';
 
+
+export default function ContactForm() {
+const dispatch = useDispatch();
+const [name, setName] = useState('')
+const [number, setNumber] = useState('')
+
+// const nameInputId = nanoid();
+// const numberInputId = nanoid();
+
+const handleChange = (e) => {
+  const { name, value } = e.currentTarget;
+  switch (name) {
+    case 'name':
+        setName(value);
+        break;
+    
+    case 'number':
+        setNumber(value);
+        break;
+    
+    default:
+        return;
+}
+};
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  dispatch(addContact({ name, number }));
+  reset();
+};
+
+const reset = () => {
+  setName('');
+  setNumber('');
+}
 
 
   return (
     <form onSubmit={handleSubmit} className={styles.form}>
-        <label htmlFor={nameInputId} className={styles.label}>
+        <label  className={styles.label}>
           Name
           <input
             type="text"
@@ -21,7 +58,7 @@ import styles from './ContactForm.module.css'
             className={styles.input}
             />
         </label>
-        <label htmlFor={numberInputId} className={styles.label}>
+        <label  className={styles.label}>
           Number
           <input
             type="tel"
