@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux';
 
-import PropTypes from "prop-types";
+
 import styles from './ContactForm.module.css'
 import { addContact } from 'redux/phoneBook';
 
