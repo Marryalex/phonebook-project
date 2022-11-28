@@ -13,65 +13,36 @@ const phoneBookInitialState =
 
 
 const phoneBookSlice = createSlice({
-    name: 'phoneBook',
+    name: 'contacts',
     initialState: {
       items: phoneBookInitialState,
       filter: '',
     },
+
     reducers: {
-      addContact(state, { payload }) {
-        state.items.push(payload);
+      addContact(state, { payload: { name, number } }) {
+        if (state.items.some(el => el.name === name)) {
+          alert(`${name} is already in contacts.`);
+          return;
+        }
+  
+        state.items.push({
+          id: nanoid(),
+          name,
+          number,
+        });
       },
   
-      deleteContact(state, { payload }) {
-        state.items = state.items.filter(item => item.id !== payload);
+      deleteContact(state, action) {
+        state.items = state.items.filter(el => el.id !== action.payload.id);
       },
   
-      filterContacts(state, { payload }) {
-        state.filter = payload;
+      filterContacts(state, action) {
+        state.filter = action.payload;
       },
-    },
-  });
+    }
+    })
 
-
-    // reducers: {
-    //   addContact(state, { payload: { name, number } }) {
-    //     if (state.items.some(el => el.name === name)) {
-    //       alert(`${name} is already in contacts.`);
-    //       return;
-    //     }
-  
-    //     state.items.push({
-    //       id: nanoid(),
-    //       name,
-    //       number,
-    //     });
-    //   },
-  
-    //   deleteContact(state, action) {
-    //     state.items = state.items.filter(el => el.id !== action.payload.id);
-    //   },
-  
-    //   filterContacts(state, action) {
-    //     state.filter = action.payload;
-    //   },
-//     reducers: {
-//       addContact: {
-//         reducer: (store, { payload }) => {
-//   store.push(payload);
-//       },
-//       prepare: (data) => {
-//         return {
-//             payload: {
-//                 ...data,
-//                 id: nanoid()
-//             }
-//         }
-//       }
-//     },
-//       deleteContact: (store, {payload}) => store.filter(({id}) => id !== payload),
-//       filterContacts: (_, {payload}) => payload
-// }
 
 
 

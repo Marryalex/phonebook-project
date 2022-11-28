@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useDispatch } from 'react-redux';
 
 import PropTypes from "prop-types";
@@ -11,8 +11,6 @@ const dispatch = useDispatch();
 const [name, setName] = useState('')
 const [number, setNumber] = useState('')
 
-// const nameInputId = nanoid();
-// const numberInputId = nanoid();
 
 const handleChange = (e) => {
   const { name, value } = e.currentTarget;
@@ -79,7 +77,5 @@ const reset = () => {
   )
 }
 
-ContactForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired
-};
+
 

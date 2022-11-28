@@ -5,23 +5,29 @@ import ContactListItem from "./ContactListItem/ContactListItem";
 import PropTypes from "prop-types";
 import styles from './ContactList.module.css'
 
+const getContacts = (items, filter) =>
+  items.filter(contact =>
+    contact.name.toLowerCase().includes(filter.toLowerCase())
+  );
+
 const ContactList = () => {
-  const contacts = useSelector(state => state.items);
-  const filter = useSelector(state => state.filter);
+  const items = useSelector(state => state.contacts.items);
+  const filter = useSelector(state => state.contacts.filter);
   const dispatch = useDispatch();
+  const contacts = getContacts(items, filter);
+
   
   return (
     <ul className={styles.contacts_list}>
-      {contacts
-      .filter(el => el.name.toLowerCase().includes(filter))
-      .map(({ id, name, number }) => (
+      {contacts.length ? 
+      contacts.map(({ id, name, number }) => (
         <ContactListItem
           key={id}
           contactName={name}
           contactNumber={number}
           onClickDeleteContact={() => dispatch(deleteContact({id}))}
         />
-      ))}
+      )) : 'No contacts' }
     </ul>
   );
   }
@@ -34,6 +40,5 @@ const ContactList = () => {
         number: PropTypes.string.isRequired,
       })
     ),
-    onDeleteContact: PropTypes.func.isRequired,
   };
   export default ContactList
