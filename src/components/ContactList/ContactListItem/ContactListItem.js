@@ -8,6 +8,7 @@ const ContactListItem = ({
     onClickDeleteContact,
   }) => {
     return (
+      
       <li className={styles.contact_item}>
         <span className={styles.list_item_text}>{contactName}:</span>
         <span className={styles.list_item_text}>{contactNumber}</span>

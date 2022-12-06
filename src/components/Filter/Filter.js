@@ -1,12 +1,13 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { filterContacts } from "redux/phoneBook";
+import { filterValue } from "redux/filterSlice";
+import { getFilterValue } from "redux/selectors";
 import styles from './Filter.module.css'
 
 
 const Filter = () => {
   const dispatch = useDispatch();
-  const filter = useSelector(state => state.contacts.filter);
+  const filter = useSelector(getFilterValue)
 
   return(
     <label className={styles.filter_label}>
@@ -15,7 +16,7 @@ const Filter = () => {
       name="filter"
         type="text"
         value={filter}
-        onChange={e => dispatch(filterContacts(e.target.value.toLowerCase()))}
+        onChange={e => dispatch(filterValue(e.target.value.toLowerCase()))}
         className={styles.filter_input}
       />
     </label>
