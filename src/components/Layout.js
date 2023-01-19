@@ -1,12 +1,30 @@
 import { Outlet } from 'react-router-dom';
-import { AppBar } from './AppBar/AppBar';
+import StyledAppBar from './AppBar/AppBar';
 import { Suspense } from 'react';
+
+import {
+  CircularProgress,
+  Box,
+} from '@mui/material';
 
 export const Layout = () => {
   return (
-    <div style={{ maxWidth: 960, margin: '0 auto', padding: '0 16px' }}>
-      <AppBar />
-      <Suspense fallback={null}>
+    <div>
+      <StyledAppBar />
+      <Suspense
+        fallback={
+          <Box sx={{ width: '100vw', height: '100vh', position: 'relative' }}>
+            <CircularProgress
+              sx={{
+                position: 'absolute',
+                top: '40%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+              }}
+            />
+          </Box>
+        }
+      >
         <Outlet />
       </Suspense>
     </div>
