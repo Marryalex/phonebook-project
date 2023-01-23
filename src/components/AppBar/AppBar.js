@@ -1,28 +1,3 @@
-// import { Navigation } from "../Navigation/Navigation";
-// import { UserMenu } from '../UserMenu/UserMenu';
-// import { AuthNav } from '../AuthNav/AuthNav';
-// import { useAuth } from '../../hooks';
-// import {
-//   AppBar,
-//   Toolbar,
-//   Container,
-// } from '@mui/material';
-
-// export const StyledAppBar = () => {
-
-//     const { isLoggedIn } = useAuth();
-
-//   return (
-//     <AppBar position="static" component="header">
-//         <Container maxWidth="lg">
-//           <Toolbar disableGutters>
-//       <Navigation />
-//       {isLoggedIn ? <UserMenu /> : <AuthNav />}
-//       </Toolbar>
-//         </Container>
-//       </AppBar>
-//   );
-// };
 
 
 import * as React from 'react';

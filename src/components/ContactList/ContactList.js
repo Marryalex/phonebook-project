@@ -6,6 +6,8 @@ import PropTypes from "prop-types";
 import styles from './ContactList.module.css'
 import { deleteContact } from "redux/operations";
 import { getContacts, getError, getFilterValue, getIsLoading } from "redux/selectors";
+import { Snack } from 'components/Snack/Snack';
+
 
 const visibleContacts = (items, filter) =>
   items.filter(contact =>
@@ -24,7 +26,7 @@ const ContactList = () => {
   return (
     <ul className={styles.contacts_list}>
     {isLoading && !error && <p>Loading contacts...</p>}
-      {error && <p>{error}</p>}
+      {error && <Snack type="error" text="Something went wrong :("/>}
       {contacts.length ? 
       contacts.map(({ id, name, number }) => (
         <ContactListItem

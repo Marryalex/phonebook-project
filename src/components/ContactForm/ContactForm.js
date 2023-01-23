@@ -1,18 +1,39 @@
-import { useState } from 'react'
+import { useState} from 'react'
 import { useDispatch } from 'react-redux';
 import { addContact } from 'redux/operations';
 import { getContacts } from 'redux/selectors';
 import { useSelector } from 'react-redux';
+import React from 'react';
 
-import styles from './ContactForm.module.css'
+import { Snack } from 'components/Snack/Snack';
+import PersonAddRoundedIcon from '@mui/icons-material/PersonAddRounded';
+import {
+  Avatar,
+  Button,
+  TextField,
+  Grid,
+  Box,
+  Container,
+} from '@mui/material';
 
+
+
+
+
+// import styles from './ContactForm.module.css'
+// import PersonAddRoundedIcon from '@mui/icons-material/PersonAddRounded';
 
 
 export default function ContactForm() {
+
+
 const dispatch = useDispatch();
 const [name, setName] = useState('')
 const [number, setNumber] = useState('')
 const contacts = useSelector(getContacts);
+const [isSnackOpen, setIsSnackOpen] = useState(false);
+
+
 
 const isContactInList = contactName => {
   const lowercaseName = contactName.toLowerCase();
@@ -23,6 +44,7 @@ const isContactInList = contactName => {
 
 const handleChange = (e) => {
   const { name, value } = e.currentTarget;
+  
   switch (name) {
     case 'name':
         setName(value);
@@ -30,10 +52,11 @@ const handleChange = (e) => {
     
     case 'number':
         setNumber(value);
+    
         break;
     
     default:
-        return;
+      throw new Error('Not supported type')
 }
 };
 
@@ -45,6 +68,7 @@ const handleSubmit = (e) => {
     return;
   }
   dispatch(addContact({ name, number }));
+  setIsSnackOpen(true);
   reset();
 };
 
@@ -55,39 +79,93 @@ const reset = () => {
 
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
-        <label  className={styles.label}>
-          Name
-          <input
-            type="text"
+
+
+  <>
+    {isSnackOpen && (
+      <Snack
+        isOpen={isSnackOpen}
+        handleClose={() => {
+          setIsSnackOpen(false);
+        }}
+        text="Add Contact"
+        type="success"
+      />
+    )}
+    <Container component="section" maxWidth="xs">
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <PersonAddRoundedIcon />
+        </Avatar>
+
+        <Box
+          component="form"
+          noValidate
+          onSubmit={handleSubmit}
+          sx={{ mt: 3 }}
+        >
+          {/* <FormControl error> */}
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+    
+              <TextField
+              type="text"
             name="name"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            id='nameInputId'
+            error={name === ""}
+            id='numberInputId'
             value={name}
-            onChange={handleChange}
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+            label="Name"
+            autoComplete="given-name"
             required
-            className={styles.input}
-            />
-        </label>
-        <label  className={styles.label}>
-          Number
-          <input
-            type="tel"
+            fullWidth
+            onChange={handleChange}
+            helperText={name === "" ? 'Required' : ' '}
+    />
+
+            </Grid>
+
+       
+            <Grid item xs={12} sm={6}>
+              <TextField
+            type="text"
             name="number"
-            pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+            inputProps={{ 
+           inputMode: 'numeric', 
+           pattern: ''
+    }} 
+            error={name === ""}
             id='numberInputId'
             value={number}
+            autoComplete="tel"
             onChange={handleChange}
-            title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-            required
-            className={styles.input}
-/>
-        </label>
-        <button type="submit" className={styles.btn}>
-          <span>Add contact</span>
-        </button>
-      </form>
+            required 
+            fullWidth
+            label="Phone number"
+            helperText={name === "" ? 'Required' : ' '}
+              />
+            </Grid> 
+            
+          </Grid>
+    
+          <Button
+            type="submit"
+            disabled={ !name || !number }
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Add Contact
+          </Button>
+        </Box>
+      </Box>
+    </Container>
+  </>
   )
 }
 

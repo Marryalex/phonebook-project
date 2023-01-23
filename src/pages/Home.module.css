@@ -23,9 +23,9 @@ ul {
 .btn {
 	display: inline-block;
 	text-transform: uppercase;
-	border: 2px solid #2c3e50;
+	/* border: 2px solid #2c3e50; */
 	margin-top: 100px; 
-	font-size: 0.7em;
+	font-size: 0.9em;
 	font-weight: 700;
 	padding: 0.1em 0.4em;
 	text-align: center;
@@ -34,10 +34,10 @@ ul {
 	transition: color 0.3s, border-color 0.3s;
 }
 
-.btn:hover {
+/* .btn:hover {
 	border-color: #16a085;
 	color: #16a085;
-}
+} */
 
 /* basic grid, only for this demo */
 
@@ -76,11 +76,10 @@ ul {
 
 /* HARDCOVER FRONT */
 .hardcover_front li:first-child {
-	/* background-color: #6A679E; */
-	background-image: url('https://images.unsplash.com/photo-1554034483-04fda0d3507b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80');
+	background-color: #776BCC;
+	
 	background-size: 250px 275px;
-	background-position: center;
-	background-repeat: no-repeat;
+
 	-webkit-backface-visibility: hidden;
 	-moz-backface-visibility: hidden;
 	backface-visibility: hidden;

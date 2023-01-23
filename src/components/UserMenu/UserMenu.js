@@ -22,11 +22,28 @@ export const UserMenu = () => {
     setAnchorElUser(null);
   };
 
+  const handelLogoutUser = () => {
+    dispatch(logOut());
+  };
+
   return (
-<Box sx={{ flexGrow: 0 }}>
+    <>
+      <Typography
+        sx={{
+          mr: 2,
+          display: { xs: 'none', md: 'flex' },
+          fontWeight: 700,
+          color: 'inherit',
+          textDecoration: 'none',
+        }}
+      >Welcome, {user.name}</Typography>
+    
+<Box sx={{ flexGrow: 0 }}> 
+
             <Tooltip title="Open settings">
+            
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-              <p>Welcome, {user.name}</p>
+             
                 <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
               </IconButton>
             </Tooltip>
@@ -46,12 +63,13 @@ export const UserMenu = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-                <MenuItem  onClick={handleCloseUserMenu}>
-                <button type="button" onClick={() => dispatch(logOut())}>
+                <MenuItem onClick={handelLogoutUser}>
+                
       <Typography textAlign="center">Logout</Typography>
-      </button>
+
                 </MenuItem>
             </Menu>
           </Box>
+          </>
   );
 };

@@ -144,7 +144,7 @@ export const RegisterForm = () => {
 					<span className='button__text'>Sign up</span>
 				</button>
         <Link
-                    // variant="body1"
+                    
                     color='rgba(255, 255, 0, 0,87)'
                     onClick={handleNavigateToLogin}
                     href="#"

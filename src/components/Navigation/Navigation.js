@@ -41,8 +41,11 @@ export const Navigation = () => {
   };
   const handleCloseContactsNavButton = () => {
     setAnchorElNav(null);
-
-    navigate('/contacts');
+    if (!isLoggedIn) {
+      navigate('/login');
+      return;
+    }
+    navigate('/contacts', { replace: true });
   };
 
   const handleCloseHomeNavButton = () => {

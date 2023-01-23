@@ -1,10 +1,12 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Helmet } from 'react-helmet';
+import Filter from '../components/Filter/Filter'
 import ContactList from '../components/ContactList/ContactList';
 import ContactForm from '../components/ContactForm/ContactForm';
 import { fetchContacts } from '../redux/operations';
 import { getIsLoading } from '../redux/selectors';
+
+import { CircularProgress } from '@mui/material';
 
 export default function Contacts() {
   const dispatch = useDispatch();
@@ -16,11 +18,18 @@ export default function Contacts() {
 
   return (
     <>
-      <Helmet>
-        <title>Your contacts</title>
-      </Helmet>
       <ContactForm />
-      <div>{isLoading && 'Request in progress...'}</div>
+      {/* <div>{isLoading && 'Request in progress...'}</div> */}
+      {isLoading && <CircularProgress     
+      sx={{
+              position: 'absolute',
+              top: '40%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+            }}
+              
+            />}
+      <Filter/>
       <ContactList />
     </>
   );
