@@ -20,14 +20,16 @@ function StyledAppBar() {
 
 
   return (
-    <AppBar position="static">
-      <Container maxWidth="xl">
+    <>
+    <AppBar position="static" component="header">
+      <Container maxWidth="lg">
         <Toolbar disableGutters>
           <Navigation />
           {isLoggedIn ? <UserMenu /> : <AuthNav />}
         </Toolbar>
       </Container>
     </AppBar>
+    </>
   );
 }
 export default StyledAppBar;

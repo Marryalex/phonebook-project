@@ -1,11 +1,12 @@
 import { useEffect, lazy } from 'react';
 import { useDispatch } from 'react-redux';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import { Layout } from './Layout';
 import { PrivateRoute } from './PrivateRoute';
 import { RestrictedRoute } from './RestrictedRoute';
 import { refreshUser } from 'redux/auth/operations';
 import { useAuth } from '../hooks';
+import { Box } from '@mui/material';
 
 
 const HomePage = lazy(() => import('../pages/Home'));
@@ -21,7 +22,9 @@ export default function App() {
     dispatch(refreshUser());
   }, [dispatch]);
   return isRefreshing ? (
+    <Box sx={{ width: '100vw', height: '100vh', position: 'relative' }}>
     <b>Refreshing user...</b>
+    </Box>
   ) : (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -41,10 +44,11 @@ export default function App() {
         <Route
           path="/contacts"
           element={
-            <PrivateRoute redirectTo="/contacts" component={<ContactsPage />} />
+            <PrivateRoute redirectTo="/login" component={<ContactsPage />} />
           }
         />
-      </Route>
+    <Route path="*" element={<Navigate to="/" replace />} />
+    </Route>
     </Routes>
   )
 }

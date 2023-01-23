@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import StyledAppBar from './AppBar/AppBar';
 import { Suspense } from 'react';
+import Footer from './Footer/Footer';
 
 import {
   CircularProgress,
@@ -9,7 +10,7 @@ import {
 
 export const Layout = () => {
   return (
-    <div>
+    <>
       <StyledAppBar />
       <Suspense
         fallback={
@@ -26,7 +27,9 @@ export const Layout = () => {
         }
       >
         <Outlet />
+       
       </Suspense>
-    </div>
+       <Footer />
+    </>
   );
 };

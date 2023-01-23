@@ -7,7 +7,7 @@ import { store, persistor } from './redux/store';
 import App from 'components/App';
 import './index.css';
 
-// import 'modern-normalize';
+import 'modern-normalize';
 import { ThemeProvider } from '@mui/material/styles';
 import { theme } from 'utils/theme';
 

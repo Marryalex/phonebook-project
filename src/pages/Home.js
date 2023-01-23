@@ -14,7 +14,7 @@ export default function Home() {
       <Box
         sx={{
           // backgroundImage: `linear-gradient(90deg, #C7C5F4, #776BCC)`,
-          height: '100vh',
+          // height: '100vh',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
